@@ -1,0 +1,52 @@
+<html>
+
+<body>
+
+<h5>Calculadora<h5>
+
+<div style="padding-top: 10px;">
+    Numero 1 <input id="A" type="text">
+</div>
+<div style="padding-top: 10px;">
+    <button id="Add" onclick="sendGetRequest(this.id)">+</button>
+    <button id="Sub" onclick="sendGetRequest(this.id)">-</button>
+    <button id="Mul" onclick="sendGetRequest(this.id)">*</button>
+    <button id="Div" onclick="sendGetRequest(this.id)">/</button>
+</div>
+<div style="padding-top: 10px;">
+    Numero 2 <input id="B" type="text">
+</div>
+
+<div style="padding-top: 10px;">
+    <label>Resultado: </label>
+    <label id="ans"></label>
+</div>
+
+</body>
+
+<script>
+    
+
+    sendGetRequest = function(buttonId) {
+        var a = document.getElementById("A").innerHTML;
+        var b = document.getElementById("B").innerHTML;
+        url = "http://localhost:8082/" + buttonId + "?A=" + a + "&B=" + b;
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+                document.getElementById("ans").innerHTML = String(xmlHttp.ans);
+            }
+        
+        };
+
+        xmlHttp.open("GET", url, true);
+        xmlHttp.setRequestHeader(header,"*");
+        xmlHttp.send();
+
+    };
+
+</script>
+
+</html>
