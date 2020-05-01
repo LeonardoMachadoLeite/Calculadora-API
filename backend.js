@@ -26,10 +26,10 @@ function main() {
     const port = 8082;
   
     // Routes
-    app.get('/Add?:A&:B', add);
-    app.get('/Sub', sub);
-    app.get('/Mul', mul);
-    app.get('/Div', div);
+    app.get('/Add/{A}/{B}', add);
+    app.get('/Sub/{A}/{B}', sub);
+    app.get('/Mul/{A}/{B}', mul);
+    app.get('/Div/{A}/{B}', div);
 
     app.listen(port, () => console.log('Server is listening on port: ' + port));
   }

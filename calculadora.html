@@ -30,7 +30,7 @@
     sendGetRequest = function(buttonId) {
         var a = document.getElementById("A").innerHTML;
         var b = document.getElementById("B").innerHTML;
-        url = "http://localhost:8082/" + buttonId + "?A=" + a + "&B=" + b;
+        url = "http://localhost:8082/" + buttonId + "/" + a + "/" + b;
         var xmlHttp = new XMLHttpRequest();
 
         xmlHttp.onreadystatechange = function() {
@@ -42,7 +42,6 @@
         };
 
         xmlHttp.open("GET", url, true);
-        xmlHttp.setRequestHeader(header,"*");
         xmlHttp.send();
 
     };
