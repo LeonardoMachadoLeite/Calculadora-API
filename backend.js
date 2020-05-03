@@ -1,35 +1,55 @@
 var express = require("express")
+const cors = require('cors');
+
 
 function add(req, res) {
-    console.log('A:' + String(req.query.A))
-    console.log('B:' + String(req.query.B))
-    res.send(200).json({
-        ans: Number(req.A) + Number(req.B)
-    });
+    console.log("POST Add")
+    const { A, B } = req.body
+    console.log('A:' + String(A))
+    console.log('B:' + String(B))
+    res.json({
+        "ans": (Number(A) + Number(B))
+    }).send(200);
 }
 
-function sub(a, b) {
-    return Number(a) - Number(b);
+function sub(req, res) {
+    const { A, B } = req.body
+    console.log('A:' + String(A))
+    console.log('B:' + String(B))
+    res.json({
+        "ans": (Number(A) - Number(B))
+    }).send(200);
 }
 
-function mul(a, b) {
-    return Number(a) * Number(b);
+function mul(req, res) {
+    const { A, B } = req.body
+    console.log('A:' + String(A))
+    console.log('B:' + String(B))
+    res.json({
+        "ans": (Number(A) * Number(B))
+    }).send(200);
 }
 
-function div(a, b) {
-    return Number(a) / Number(b);
+function div(req, res) {
+    const { A, B } = req.body
+    console.log('A:' + String(A))
+    console.log('B:' + String(B))
+    res.json({
+        "ans": (Number(A) / Number(B))
+    }).send(200);
 }
 
 function main() {
 
     var app = express();
     const port = 8082;
+    app.use(cors);
   
     // Routes
-    app.get('/Add/{A}/{B}', add);
-    app.get('/Sub/{A}/{B}', sub);
-    app.get('/Mul/{A}/{B}', mul);
-    app.get('/Div/{A}/{B}', div);
+    app.post('/Add', add);
+    app.post('/Sub', sub);
+    app.post('/Mul', mul);
+    app.post('/Div', div);
 
     app.listen(port, () => console.log('Server is listening on port: ' + port));
   }

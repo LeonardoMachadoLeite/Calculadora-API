@@ -30,7 +30,7 @@
     sendGetRequest = function(buttonId) {
         var a = document.getElementById("A").innerHTML;
         var b = document.getElementById("B").innerHTML;
-        url = "http://localhost:8082/" + buttonId + "/" + a + "/" + b;
+        url = "http://localhost:8082/" + buttonId;
         var xmlHttp = new XMLHttpRequest();
 
         xmlHttp.onreadystatechange = function() {
@@ -38,11 +38,17 @@
                 // Typical action to be performed when the document is ready:
                 document.getElementById("ans").innerHTML = String(xmlHttp.ans);
             }
-        
         };
 
-        xmlHttp.open("GET", url, true);
-        xmlHttp.send();
+        params = {
+            "A": a,
+            "B": b
+        };
+
+        xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xmlHttp.setRequestHeader("Access-Control-Allow-Origin","*");
+        xmlHttp.send(JSON.stringify(params));
 
     };
 
